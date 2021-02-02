@@ -1,4 +1,5 @@
 import Chart from './components/Chart'
+import ChartContainer from './components/ChartContainer'
 
 const data = [
 	{
@@ -108,7 +109,7 @@ const data = [
 function App() {
 	return (
 		<div>
-			<Chart />
+			<ChartContainer chartsData={data} />
 		</div>
 	)
 }

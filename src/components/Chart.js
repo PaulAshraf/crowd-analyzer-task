@@ -1,57 +1,66 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { BarChart, CartesianGrid, XAxis, YAxis, Bar, Tooltip } from 'recharts'
+import { mainColor, secondaryColor, textColor } from '../constants/colors'
+import styled from 'styled-components'
 
-const data = [
-	{
-		name: 'Page A',
-		uv: 4000,
-		pv: 2400,
-	},
-	{
-		name: 'Page B',
-		uv: 3000,
-		pv: 1398,
-	},
-	{
-		name: 'Page C',
-		uv: 2000,
-		pv: 9800,
-	},
-	{
-		name: 'Page D',
-		uv: 2780,
-		pv: 3908,
-	},
-	{
-		name: 'Page E',
-		uv: 1890,
-		pv: 4800,
-	},
-	{
-		name: 'Page F',
-		uv: 2390,
-		pv: 3800,
-	},
-	{
-		name: 'Page G',
-		uv: 3490,
-		pv: 4300,
-	},
-]
+const Chart = ({ title, data }) => {
+	const fontSize = 13
 
-const Chart = () => {
 	return (
-		<div>
-			<BarChart width={730} height={250} data={data}>
-				<CartesianGrid strokeDasharray='3 3' />
-				<XAxis dataKey='name' />
-				<YAxis />
-				<Tooltip />
-				<Bar dataKey='pv' fill='#8884d8' />
-				<Bar dataKey='uv' fill='#82ca9d' />
-			</BarChart>
-		</div>
+		<FlexElement>
+			<Wrapper>
+				<Title>{title}</Title>
+				<BarChart width={500} height={250} data={data} margin={0}>
+					<CartesianGrid strokeDasharray='3 3' stroke={secondaryColor} />
+					<XAxis
+						dataKey='name'
+						stroke={secondaryColor}
+						tick={{ fontSize: fontSize }}
+					/>
+					<YAxis stroke={secondaryColor} tick={{ fontSize: fontSize }} />
+					<Tooltip />
+					<Bar dataKey='Count' fill={mainColor} />
+				</BarChart>
+			</Wrapper>
+		</FlexElement>
 	)
+}
+
+const FlexElement = styled.div`
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 50%;
+
+	@media (max-width: 1200px) {
+		width: 100%;
+	}
+`
+
+const Title = styled.h2`
+	font-weight: 800;
+	margin: 0;
+	padding: 0;
+	margin-bottom: 15px;
+	color: ${textColor};
+`
+
+const Wrapper = styled.div`
+	padding: 25px;
+	margin: 50px;
+	background-color: white;
+	border-radius: 15px;
+`
+
+Chart.propTypes = {
+	title: PropTypes.string,
+	data: PropTypes.arrayOf(
+		PropTypes.exact({
+			name: PropTypes.string,
+			count: PropTypes.number,
+		})
+	),
 }
 
 export default Chart
