@@ -26,7 +26,6 @@ const Wrapper = styled.div`
 	justify-content: flex-start;
 	flex-wrap: wrap;
 	background-color: ${bgColor};
-	padding: 25px;
 `
 
 ChartContainer.propTypes = {

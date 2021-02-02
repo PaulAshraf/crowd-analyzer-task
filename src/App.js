@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import ChartContainer from './components/ChartContainer'
+import styled from 'styled-components'
 import { api } from './constants/urls'
 import axios from 'axios'
+import Header from './components/Header'
+import { bgColor } from './constants/colors'
 
 function App() {
 	const [loading, setLoading] = useState(true)
@@ -10,8 +13,8 @@ function App() {
 
 	const getData = async () => {
 		try {
-			const data = await axios.get(api)
-			setData(data.data.data)
+			const response = await axios.get(api)
+			setData(response.data.data)
 			setLoading(false)
 		} catch (error) {
 			setError(error.message)
@@ -20,15 +23,25 @@ function App() {
 		}
 	}
 
+	const addChart = () => {
+		console.log('add')
+	}
+
 	useEffect(() => {
 		getData()
 	}, [])
 
 	return (
-		<div>
+		<Main>
+			<Header onClick={addChart} />
 			<ChartContainer chartsData={data} loading={loading} error={error} />
-		</div>
+		</Main>
 	)
 }
+
+const Main = styled.main`
+	background-color: ${bgColor};
+	padding: 50px;
+`
 
 export default App

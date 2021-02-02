@@ -6,7 +6,7 @@ import styled from 'styled-components'
 
 const Chart = ({ title, data, delay }) => {
 	const fontSize = 13
-	console.log(delay)
+
 	return (
 		<FlexElement>
 			<Wrapper>
@@ -48,10 +48,9 @@ const Title = styled.h2`
 
 const Wrapper = styled.div`
 	padding: 25px;
-	margin: 50px;
-	margin-bottom: 0;
 	background-color: white;
 	border-radius: 15px;
+	margin-bottom: 25px;
 `
 
 Chart.propTypes = {
