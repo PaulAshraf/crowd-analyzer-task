@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import Chart from './Chart'
 import { bgColor } from '../constants/colors'
-import CenterIcon from './CenterIcon'
+import CenterIcon from '../components/CenterIcon'
 
 const ChartContainer = ({ chartsData, loading, error }) => {
 	return (
