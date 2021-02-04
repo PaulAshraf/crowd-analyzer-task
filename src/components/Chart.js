@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useLayoutEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import { BarChart, CartesianGrid, XAxis, YAxis, Bar, Tooltip } from 'recharts'
 import { mainColor, secondaryColor, textColor } from '../constants/colors'
@@ -7,11 +7,22 @@ import styled from 'styled-components'
 const Chart = ({ title, data, delay }) => {
 	const fontSize = 13
 
+	const [width, setWidth] = useState(500)
+
+	useLayoutEffect(() => {
+		const updateWidth = () => {
+			if (window.innerWidth < 600) setWidth(window.innerWidth - 150)
+			else setWidth(500)
+		}
+		window.addEventListener('resize', updateWidth)
+		return () => window.removeEventListener('resize', updateWidth)
+	}, [])
+
 	return (
 		<FlexElement>
 			<Wrapper>
 				<Title>{title}</Title>
-				<BarChart width={500} height={250} data={data} margin={0}>
+				<BarChart width={width} height={250} data={data} margin={0}>
 					<CartesianGrid strokeDasharray='3 3' stroke={secondaryColor} />
 					<XAxis
 						dataKey='name'
