@@ -1,13 +1,13 @@
 # ✨ Charts App for CrowdAnalyzer ✨
 
-### Install Packages
+## Install Packages
 
 ```bash
 npm i
 npm i -g json-server
 ```
 
-### Run Locally
+## Run Locally
 
 ```bash
 npm start

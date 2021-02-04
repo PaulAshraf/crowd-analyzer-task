@@ -4,3 +4,11 @@ body {
 	margin: 0;
 	font-family: 'Montserrat';
 }
+
+.Toastify__toast--success {
+	background: #2415c7;
+}
+
+.Toastify__toast--error {
+	background: #2415c7;
+}

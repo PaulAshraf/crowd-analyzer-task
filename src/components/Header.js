@@ -1,29 +1,26 @@
 import React, { useRef } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { toggle } from '../redux/addForm'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import { textColor } from '../constants/colors'
 import AddForm from './AddForm'
-import { Button } from '../components/Button'
+import { Button } from '../common/Button'
 
-const Header = ({ onClick, showForm, getData, toggleForm }) => {
+const Header = () => {
 	const buttonRef = useRef()
+
+	const dispatch = useDispatch()
+
+	const showForm = useSelector((state) => state.addForm.isOpen)
 
 	return (
 		<Wrapper>
 			<Title>Internal Dashboard</Title>
-			<Button onClick={onClick} ref={buttonRef} showForm={showForm}>
+			<Button onClick={() => dispatch(toggle())} ref={buttonRef}>
 				+ Add Chart
 			</Button>
-			{showForm ? (
-				<AddForm
-					parentRef={buttonRef}
-					showForm={showForm}
-					getData={getData}
-					toggleForm={toggleForm}
-				/>
-			) : (
-				<></>
-			)}
+			{showForm ? <AddForm parentRef={buttonRef} /> : <></>}
 		</Wrapper>
 	)
 }

@@ -1,13 +1,11 @@
 import React, { useLayoutEffect, useState } from 'react'
 import styled from 'styled-components'
-import { Button } from '../components/Button'
+import { useSelector, useDispatch } from 'react-redux'
+import { createRequested as createChart } from '../redux/charts'
+import { Button } from '../common/Button'
 import { bgColor, mainColor, textColor } from '../constants/colors'
-import { ToastContainer } from 'react-toastify'
-import Toast from '../components/Toast'
 import ClipLoader from 'react-spinners/ClipLoader'
-import { v4 as uuidv4 } from 'uuid'
-import axios from 'axios'
-import { api } from '../constants/urls'
+import { mainFont } from '../constants/fonts'
 
 const initialState = {
 	title: 'Mentions sentiment analysis',
@@ -43,11 +41,15 @@ const initialState = {
 	],
 }
 
-const AddForm = ({ parentRef, showForm, width = 300, getData, toggleForm }) => {
+const AddForm = ({ parentRef, width = 300 }) => {
 	const { offsetTop, offsetLeft, offsetHeight, offsetWidth } = parentRef.current
 	const [left, setLeft] = useState(offsetLeft)
-	const [charts, setCharts] = useState(initialState)
-	const [loading, setLoading] = useState(false)
+
+	const [formData, setFormData] = useState(initialState)
+
+	const dispatch = useDispatch()
+	const showForm = useSelector((state) => state.addForm.isOpen)
+	const loading = useSelector((state) => state.addForm.loading)
 
 	useLayoutEffect(() => {
 		const updateLeft = () => {
@@ -59,29 +61,19 @@ const AddForm = ({ parentRef, showForm, width = 300, getData, toggleForm }) => {
 
 	const updateCount = (e) => {
 		if (e.target.name.includes('crowdanalyzer-title')) {
-			console.log(e.target.name, e.target.value)
-			charts.title = e.target.value
+			formData.title = e.target.value
 		}
 		if (e.target.name.includes('crowdanalyzer-data-count')) {
 			const newValue = parseInt(e.target.value)
 			const key = parseInt(e.target.name.split('-')[3])
-			charts.data[key].Count = newValue
+			formData.data[key].Count = newValue
 		}
-		setCharts(charts)
+		setFormData(formData)
 	}
 
 	const submit = async (e) => {
 		e.preventDefault()
-		setLoading(true)
-		try {
-			await axios.post(api, { id: uuidv4(), ...charts })
-			Toast({ type: 'success', msg: null })
-			getData()
-		} catch (error) {
-			console.error(error)
-			Toast({ type: 'error', msg: error.message })
-		}
-		setLoading(false)
+		dispatch(createChart(formData))
 	}
 
 	return (
@@ -97,7 +89,7 @@ const AddForm = ({ parentRef, showForm, width = 300, getData, toggleForm }) => {
 			<Input name='crowdanalyzer-title' onChange={updateCount} />
 			<hr color='white' />
 			<Title>Data</Title>
-			{charts.data.map((row, i) => (
+			{formData.data.map((row, i) => (
 				<FormRow key={i}>
 					{row.name}
 					<Input
@@ -111,10 +103,9 @@ const AddForm = ({ parentRef, showForm, width = 300, getData, toggleForm }) => {
 			))}
 			<FormRow>
 				<Button type='submit' onClick={submit}>
-					{!loading ? 'Add' : <ClipLoader color='#fff' />}
+					{!loading ? 'Add' : <ClipLoader size={12} color='#fff' />}
 				</Button>
 			</FormRow>
-			<ToastContainer />
 		</Wrapper>
 	)
 }
@@ -132,7 +123,7 @@ const Input = styled.input`
 	width: ${(props) => props.width || 100}%;
 	height: 25px;
 	border-bottom: 2px solid ${mainColor};
-	font-family: 'Montserrat';
+	font-family: '${mainFont}';
 	color: ${mainColor};
 	background-color: ${bgColor};
 	/* padding-left: 5px; */
