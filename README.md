@@ -22,7 +22,8 @@ npm run cypress:run
 
 ## Deployed with netlify
 
-[https://crowdanalyzer.netlify.app](crowdanalyzer.netlify.app)
+[crowdanalyzer.netlify.app](https://crowdanalyzer.netlify.app)
+_Note: Data does not presist on the hosted version_
 
 ---
 
