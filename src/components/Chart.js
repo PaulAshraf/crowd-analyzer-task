@@ -7,12 +7,15 @@ import styled from 'styled-components'
 const Chart = ({ title, data, delay }) => {
 	const fontSize = 13
 
-	const [width, setWidth] = useState(500)
+	const getWidth = () => {
+		if (window.innerWidth < 600) return window.innerWidth - 150
+		else return 500
+	}
+	const [width, setWidth] = useState(getWidth())
 
 	useLayoutEffect(() => {
 		const updateWidth = () => {
-			if (window.innerWidth < 600) setWidth(window.innerWidth - 150)
-			else setWidth(500)
+			setWidth(getWidth())
 		}
 		window.addEventListener('resize', updateWidth)
 		return () => window.removeEventListener('resize', updateWidth)

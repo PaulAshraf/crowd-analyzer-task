@@ -41,7 +41,7 @@ const initialState = {
 	],
 }
 
-const AddForm = ({ parentRef, width = 300 }) => {
+const AddForm = ({ parentRef, width = 250 }) => {
 	const { offsetTop, offsetLeft, offsetHeight, offsetWidth } = parentRef.current
 	const [left, setLeft] = useState(offsetLeft)
 
