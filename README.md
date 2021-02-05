@@ -11,7 +11,13 @@ npm i -g json-server
 
 ```bash
 npm start
-json-server --watch db.json --port 3001
+json-server --watch db.json --port 300
+```
+
+## Testing with Cypress
+
+```bash
+npm run cypress:run
 ```
 
 ---
