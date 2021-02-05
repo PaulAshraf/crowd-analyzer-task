@@ -31,7 +31,6 @@ function* fetchCharts() {
 function* createChart(action) {
 	try {
 		const data = yield call(postAPI, action.payload)
-		console.log(data)
 		yield put(createSuccess(data))
 	} catch (error) {
 		yield put(createRejected(error.message))
