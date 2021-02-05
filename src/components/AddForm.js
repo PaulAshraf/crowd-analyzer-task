@@ -84,6 +84,7 @@ const AddForm = ({ parentRef, width = 300 }) => {
 			parentWidth={offsetWidth}
 			width={width}
 			showForm={showForm}
+			data-cy='add-form'
 		>
 			<Title>Title</Title>
 			<Input name='crowdanalyzer-title' onChange={updateCount} />
@@ -102,7 +103,7 @@ const AddForm = ({ parentRef, width = 300 }) => {
 				</FormRow>
 			))}
 			<FormRow>
-				<Button type='submit' onClick={submit}>
+				<Button type='submit' onClick={submit} data-cy='internal-add-button'>
 					{!loading ? 'Add' : <ClipLoader size={12} color='#fff' />}
 				</Button>
 			</FormRow>

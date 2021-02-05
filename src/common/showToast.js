@@ -5,11 +5,14 @@ import { mainFont } from '../constants/fonts'
 
 const showToast = ({ type, msg }) => {
 	if (type === 'success')
-		return toast.success(<Text>✨ Chart added succefully!</Text>, {
-			position: 'bottom-center',
-		})
+		return toast.success(
+			<Text data-cy='toast-success'>✨ Chart added successfully!</Text>,
+			{
+				position: 'bottom-center',
+			}
+		)
 	if (type === 'error')
-		return toast.error(<Text>{`⚠️ ${msg}`}</Text>, {
+		return toast.error(<Text data-cy='toast-error'>{`⚠️ ${msg}`}</Text>, {
 			position: 'bottom-center',
 		})
 }

@@ -19,7 +19,7 @@ const ChartContainer = () => {
 	}, [dispatch])
 
 	return (
-		<div>
+		<div data-cy='container'>
 			{!loading && !error ? (
 				<Wrapper>
 					{charts.map((chart, i) => (

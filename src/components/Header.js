@@ -17,7 +17,11 @@ const Header = () => {
 	return (
 		<Wrapper>
 			<Title>Internal Dashboard</Title>
-			<Button onClick={() => dispatch(toggle())} ref={buttonRef}>
+			<Button
+				onClick={() => dispatch(toggle())}
+				ref={buttonRef}
+				data-cy='add-button'
+			>
 				+ Add Chart
 			</Button>
 			{showForm ? <AddForm parentRef={buttonRef} /> : <></>}

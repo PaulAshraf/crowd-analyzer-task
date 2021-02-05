@@ -19,7 +19,7 @@ const Chart = ({ title, data, delay }) => {
 	}, [])
 
 	return (
-		<FlexElement>
+		<FlexElement data-cy='chart'>
 			<Wrapper>
 				<Title>{title}</Title>
 				<BarChart width={width} height={250} data={data} margin={0}>
@@ -31,7 +31,12 @@ const Chart = ({ title, data, delay }) => {
 					/>
 					<YAxis stroke={secondaryColor} tick={{ fontSize: fontSize }} />
 					<Tooltip />
-					<Bar dataKey='Count' fill={mainColor} animationBegin={delay} />
+					<Bar
+						dataKey='Count'
+						fill={mainColor}
+						animationBegin={delay}
+						radius={[5, 5, 0, 0]}
+					/>
 				</BarChart>
 			</Wrapper>
 		</FlexElement>
