@@ -30,7 +30,8 @@ function* fetchCharts() {
 
 function* createChart(action) {
 	try {
-		const data = yield call(postAPI, action.payload)
+		let data = yield call(postAPI, action.payload)
+		if (process.env.NODE_ENV === 'production') data = action.payload
 		yield put(createSuccess(data))
 	} catch (error) {
 		yield put(createRejected(error.message))

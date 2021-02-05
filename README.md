@@ -20,6 +20,10 @@ json-server --watch db.json --port 300
 npm run cypress:run
 ```
 
+## Deployed with netlify
+
+[https://crowdanalyzer.netlify.app](crowdanalyzer.netlify.app)
+
 ---
 
 Paul Ashraf ©️ 2021
