@@ -11,7 +11,7 @@ npm i -g json-server
 
 ```bash
 npm start
-json-server --watch db.json --port 300
+json-server --watch db.json --port 3001
 ```
 
 ## Testing with Cypress
