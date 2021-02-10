@@ -1,12 +1,5 @@
-import { createSlice, createAction } from '@reduxjs/toolkit'
-
-const isCreationFinished = (action) => {
-	return (
-		action.type.startsWith('charts/create') &&
-		(action.type.endsWith('Rejected') || action.type.endsWith('Success'))
-	)
-}
-const createChartRequest = createAction('charts/createRequested')
+import { createSlice, isAnyOf } from '@reduxjs/toolkit'
+import { createRequested, createSuccess, createRejected } from './charts'
 
 const initialState = {
 	isOpen: false,
@@ -28,10 +21,10 @@ const addFormSlice = createSlice({
 	},
 	extraReducers: (builder) => {
 		builder
-			.addCase(createChartRequest, (state) => {
+			.addCase(createRequested, (state) => {
 				state.loading = true
 			})
-			.addMatcher(isCreationFinished, (state) => {
+			.addMatcher(isAnyOf(createRejected, createSuccess), (state) => {
 				state.isOpen = false
 				state.loading = false
 			})

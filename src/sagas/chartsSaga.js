@@ -1,13 +1,14 @@
 import { call, put, takeLatest } from 'redux-saga/effects'
-import { createAction } from '@reduxjs/toolkit'
+import {
+	fetchSuccess,
+	fetchRejected,
+	createSuccess,
+	createRejected,
+	fetchRequested,
+	createRequested,
+} from '../redux/charts'
 import axios from 'axios'
 import { api } from '../constants/urls'
-
-const fetchSuccess = createAction('charts/fetchSuccess')
-const fetchRejected = createAction('charts/fetchRejected')
-
-const createSuccess = createAction('charts/createSuccess')
-const createRejected = createAction('charts/createRejected')
 
 const fetchAPI = async () => {
 	const response = await axios.get(api)
@@ -39,6 +40,6 @@ function* createChart(action) {
 }
 
 export function* chartsWatcher() {
-	yield takeLatest('charts/fetchRequested', fetchCharts)
-	yield takeLatest('charts/createRequested', createChart)
+	yield takeLatest(fetchRequested.type, fetchCharts)
+	yield takeLatest(createRequested.type, createChart)
 }
